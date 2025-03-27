@@ -55,7 +55,6 @@ public class Keyboard : MonoBehaviour
         {
             //Correct code: Turn green
             lightRenderer.material = correctMaterial;
-            SceneManager.LoadScene(8);
         }
         else
         {
