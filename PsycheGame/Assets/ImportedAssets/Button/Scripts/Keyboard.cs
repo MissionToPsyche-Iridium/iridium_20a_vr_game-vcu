@@ -54,6 +54,7 @@ public class Keyboard : MonoBehaviour
         {
             //Correct code: Turn green
             lightRenderer.material = correctMaterial;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(8);
         }
         else
         {
