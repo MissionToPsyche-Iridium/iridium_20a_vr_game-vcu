@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Keyboard : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class Keyboard : MonoBehaviour
         {
             //Correct code: Turn green
             lightRenderer.material = correctMaterial;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(8);
+            SceneManager.LoadScene(8);
         }
         else
         {
