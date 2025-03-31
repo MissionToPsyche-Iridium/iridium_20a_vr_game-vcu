@@ -10,6 +10,7 @@ public class ScrewdriverInteraction : MonoBehaviour
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable.enabled = false;
     }
 
     void Update()
