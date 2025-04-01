@@ -57,6 +57,6 @@ public class AsteroidRotation : MonoBehaviour
     {
         isGrabbed = false;
         rb.isKinematic = true;  // Make stationary to prevent movement
-        transform.SetParent(originalParent, true);  // Reattach to the original parent but keep the new position
+        // transform.SetParent(originalParent, true);  // Reattach to the original parent but keep the new position
     }
 }
