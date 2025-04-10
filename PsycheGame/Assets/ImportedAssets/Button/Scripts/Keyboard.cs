@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class Keyboard : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class Keyboard : MonoBehaviour
     public bool answerCorrect;
     public string correctCode;
     public GameObject answerLight;
+    public SafeDoorOpener Door;
 
     // For code light
     public Material correctMaterial; // Material when the code is correct
@@ -55,6 +55,8 @@ public class Keyboard : MonoBehaviour
         {
             //Correct code: Turn green
             lightRenderer.material = correctMaterial;
+            Door.OpenSafeDoor();
+
         }
         else
         {
