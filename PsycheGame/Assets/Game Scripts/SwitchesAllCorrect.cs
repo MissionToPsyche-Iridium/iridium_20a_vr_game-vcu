@@ -5,6 +5,8 @@ public class SwitchesAllCorrect : MonoBehaviour
     public FlipSwitch[] switches;  // Array of switches to check
     public bool switchesCorrect = false;  // Boolean to track if all switches are correct
 
+    public ButtonChangeColors ButtonChangeColors;  //References button script
+
     private void Update()
     {
         CheckSwitches();
@@ -30,6 +32,11 @@ public class SwitchesAllCorrect : MonoBehaviour
             {
                 switchObj.flippable = false;  // Disable flipping
             }
+            if (ButtonChangeColors != null)
+            {
+                ButtonChangeColors.SetToGreen();  // Change color!
+            }
         }
     }
 }
+
