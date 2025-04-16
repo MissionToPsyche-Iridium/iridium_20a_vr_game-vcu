@@ -23,14 +23,15 @@ Material:
   m_Name: RobotTrim
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: fd1fd564cee2e9e4495620a49c2d4564, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 16
   m_ValidKeywords:
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -39,8 +40,14 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Smoothness: 0.3
+    - _SmoothnessTextureChannel: 1
+    - _WorkflowMode: 0
     m_Colors:
-    - _BaseColor: {r: 0.9529412, g: 0.88911957, b: 0.34509802, a: 1}
-    - _Color: {r: 0.9529411, g: 0.8891196, b: 0.345098, a: 1}
+    - _BaseColor: {r: 1, g: 0.9567427, b: 0.5707547, a: 1}
+    - _Color: {r: 1, g: 0.9567427, b: 0.57075465, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

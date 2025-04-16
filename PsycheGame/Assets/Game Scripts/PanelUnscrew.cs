@@ -9,6 +9,8 @@ public class PanelUnscrew : MonoBehaviour
     public float unscrewTime = 1.5f;         // Time to fully unscrew
     public float rotationSpeed = 360f;       // Rotation speed in degrees/sec
 
+    public bool doorOpen = false;
+
     private bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -66,5 +68,7 @@ public class PanelUnscrew : MonoBehaviour
 
         // Disable the trigger so it doesn’t fire again
         gameObject.SetActive(false);
+
+        doorOpen = true;
     }
 }
