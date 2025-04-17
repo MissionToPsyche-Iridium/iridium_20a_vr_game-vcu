@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FlipSwitch : MonoBehaviour
@@ -8,6 +9,8 @@ public class FlipSwitch : MonoBehaviour
 
     private Quaternion leftRotation;  // Left position rotation
     private Quaternion rightRotation; // Right position rotation
+    public AudioSource sound;
+
 
     public Boolean flippable;
 
@@ -40,7 +43,9 @@ public class FlipSwitch : MonoBehaviour
                 switchHandle.rotation = leftRotation;
                 switchPosition = 0;  // Update switch position value
             }
+                sound.Play();
+
         }
-        
+
     }
 }
