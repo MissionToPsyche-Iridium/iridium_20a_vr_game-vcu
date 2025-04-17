@@ -34,7 +34,7 @@ public class SwitchesAllCorrect : MonoBehaviour
             }
             if (ButtonChangeColors != null)
             {
-                ButtonChangeColors.SetToGreen();  // Change color!
+                ButtonChangeColors.SetToGreen();  // Change color
             }
         }
     }
