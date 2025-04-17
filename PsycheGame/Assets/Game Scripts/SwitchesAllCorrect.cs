@@ -6,6 +6,7 @@ public class SwitchesAllCorrect : MonoBehaviour
     public bool switchesCorrect = false;  // Boolean to track if all switches are correct
 
     public ButtonChangeColors ButtonChangeColors;  //References button script
+    public ButtonVR buttonVR;
 
     private void Update()
     {
@@ -35,6 +36,9 @@ public class SwitchesAllCorrect : MonoBehaviour
             if (ButtonChangeColors != null)
             {
                 ButtonChangeColors.SetToGreen();  // Change color
+            }
+            if(buttonVR != null){
+                buttonVR.SetUnlocked(true);
             }
         }
     }

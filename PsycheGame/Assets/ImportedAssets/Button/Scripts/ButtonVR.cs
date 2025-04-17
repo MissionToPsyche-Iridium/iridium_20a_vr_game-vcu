@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider))]
 public class ButtonVR : MonoBehaviour
@@ -12,6 +13,7 @@ public class ButtonVR : MonoBehaviour
 
     private AudioSource sound;
     private bool isPressed = false;
+    private bool isUnlocked = false;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class ButtonVR : MonoBehaviour
     // This function is called when the button is pressed
     public void PressButton()
     {
-        if (!isPressed)
+        if (!isPressed && isUnlocked)
         {
             buttonVisual.transform.localPosition = new Vector3(0, 0.003f, 0); // Simulate button press
             onPress.Invoke(); // Invoke events
@@ -42,5 +44,13 @@ public class ButtonVR : MonoBehaviour
             onRelease.Invoke(); // Invoke events
             isPressed = false;
         }
+    }
+    public void SetUnlocked(bool unlocked)
+    {
+        isUnlocked = unlocked;
+    }
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene("Win Scene"); 
     }
 }
