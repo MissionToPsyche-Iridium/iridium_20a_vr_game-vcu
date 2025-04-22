@@ -1,28 +1,29 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FlipSwitch : MonoBehaviour
 {
     public int switchPosition = 0;  // 0 for left, 1 for right
-    public Transform switchHandle;  // Reference to the switch handle's transform (you'll assign this in the inspector)
+    public Transform switchHandle;  // Reference to the switch handle's transform
 
     private Quaternion leftRotation;  // Left position rotation
     private Quaternion rightRotation; // Right position rotation
-    public AudioSource sound;
 
+    private AudioSource sound;  // We'll get this at runtime
 
-    public Boolean flippable;
+    public bool flippable;
 
     private void Start()
     {
-        // Set the left position to the switch's current rotation at the start
+        // Cache AudioSource on this GameObject
+        sound = GetComponent<AudioSource>();
+
         leftRotation = switchHandle.rotation;
+        rightRotation = Quaternion.Euler(
+            leftRotation.eulerAngles.x,
+            leftRotation.eulerAngles.y - 100,
+            leftRotation.eulerAngles.z);
 
-        // Set the right position to the left position's Y rotation minus 100 degrees
-        rightRotation = Quaternion.Euler(leftRotation.eulerAngles.x, leftRotation.eulerAngles.y - 100, leftRotation.eulerAngles.z);
-
-        // Ensure the switch starts in the left position (it should be already, but just in case)
         switchHandle.rotation = leftRotation;
         flippable = true;
     }
@@ -33,19 +34,17 @@ public class FlipSwitch : MonoBehaviour
         {
             if (switchPosition == 0)
             {
-                // Flip to the right position
                 switchHandle.rotation = rightRotation;
-                switchPosition = 1;  // Update switch position value
+                switchPosition = 1;
             }
             else
             {
-                // Flip to the left position
                 switchHandle.rotation = leftRotation;
-                switchPosition = 0;  // Update switch position value
+                switchPosition = 0;
             }
+
+            if (sound != null)
                 sound.Play();
-
         }
-
     }
 }

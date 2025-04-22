@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 [RequireComponent(typeof(Collider))]
 public class ButtonVR : MonoBehaviour
@@ -10,14 +11,17 @@ public class ButtonVR : MonoBehaviour
     public GameObject buttonVisual; // The visual button that moves when pressed
     public UnityEvent onPress; // Optional events for additional behavior
     public UnityEvent onRelease; // Optional events for additional behavior
+    public AsteroidLandingController asteroid;
 
     private AudioSource sound;
     private bool isPressed = false;
-    private bool isUnlocked = false;
+    public bool isUnlocked;
+    public bool isLandButton;
 
     private void Awake()
     {
         sound = GetComponent<AudioSource>();
+        if (isLandButton) { isUnlocked = false; }
     }
 
     // This function is called when the button is pressed
@@ -30,6 +34,10 @@ public class ButtonVR : MonoBehaviour
             if (sound != null)
             {
                 sound.Play();
+            }
+            if (isLandButton)
+            {
+                winSequence();
             }
             isPressed = true;
         }
@@ -51,6 +59,22 @@ public class ButtonVR : MonoBehaviour
     }
     public void LoadNextScene()
     {
-        SceneManager.LoadScene("Win Scene"); 
+        SceneManager.LoadScene("Win Screen"); 
+    }
+    public void winSequence()
+    {
+        StartCoroutine(PlayLandingAndSwitchScene());
+    }
+
+    private IEnumerator PlayLandingAndSwitchScene()
+    {
+        // Start the landing animation
+        asteroid.GetComponent<AsteroidLandingController>().StartLanding();
+
+        // Wait for the duration of the landing animation
+        yield return new WaitForSeconds(asteroid.GetComponent<AsteroidLandingController>().duration);
+
+        // Now load the win screen
+        SceneManager.LoadScene("Win Screen");
     }
 }
