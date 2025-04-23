@@ -1,13 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PauseMenuManager : MonoBehaviour
 {
     public GameObject pauseMenuCanvas;
+    public CanvasGroup canvasGroup;
     public InputActionReference pauseAction;
+    public Transform playerCamera;
+
+    public LocomotionSystem locomotionSystem;
+    public UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationProvider teleportationProvider;
 
     private bool isPaused = false;
+    private Coroutine fadeCoroutine;
 
     void OnEnable()
     {
@@ -29,20 +37,58 @@ public class PauseMenuManager : MonoBehaviour
     public void TogglePause()
     {
         isPaused = !isPaused;
-        pauseMenuCanvas.SetActive(isPaused);
+
+        if (isPaused && playerCamera != null)
+        {
+            Vector3 forward = playerCamera.forward;
+            forward.y = 0f;
+            forward.Normalize();
+
+            pauseMenuCanvas.transform.position = playerCamera.position + forward * 1.5f;
+            pauseMenuCanvas.transform.rotation = Quaternion.LookRotation(-forward);
+        }
+
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+
+        fadeCoroutine = StartCoroutine(FadeCanvas(isPaused));
         Time.timeScale = isPaused ? 0f : 1f;
+
+        if (locomotionSystem != null)
+            locomotionSystem.enabled = !isPaused;
+        if (teleportationProvider != null)
+            teleportationProvider.enabled = !isPaused;
+    }
+
+    IEnumerator FadeCanvas(bool show)
+    {
+        float duration = 0.4f;
+        float start = canvasGroup.alpha;
+        float end = show ? 1f : 0f;
+
+        pauseMenuCanvas.SetActive(true); // Ensure it's active
+
+        for (float t = 0; t < duration; t += Time.unscaledDeltaTime)
+        {
+            canvasGroup.alpha = Mathf.Lerp(start, end, t / duration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = end;
+
+        if (!show)
+            pauseMenuCanvas.SetActive(false);
     }
 
     public void ResumeGame()
     {
-        isPaused = false;
-        pauseMenuCanvas.SetActive(false);
-        Time.timeScale = 1f;
+        if (isPaused)
+            TogglePause();
     }
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // Ensure time resumes
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
