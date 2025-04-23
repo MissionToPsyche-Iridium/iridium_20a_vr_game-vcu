@@ -12,6 +12,12 @@ public class PanelUnscrew : MonoBehaviour
     public bool doorOpen = false;
 
     private bool isTriggered = false;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +30,11 @@ public class PanelUnscrew : MonoBehaviour
 
     private IEnumerator UnscrewAndRemove()
     {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
         float elapsedTime = 0f;
         Vector3[] startPositions = new Vector3[screws.Length];
 
@@ -39,14 +50,9 @@ public class PanelUnscrew : MonoBehaviour
 
             for (int i = 0; i < screws.Length; i++)
             {
-                // Move in the local +Z direction
-                screws[i].transform.localPosition = startPositions[i] + screws[i].transform.TransformDirection(Vector3.forward) * (unscrewDistance * progress);
+                screws[i].transform.localPosition = startPositions[i] +
+                    screws[i].transform.TransformDirection(Vector3.forward) * (unscrewDistance * progress);
 
-
-
-
-
-                // Rotate to simulate unscrewing
                 screws[i].transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
             }
 
@@ -55,7 +61,6 @@ public class PanelUnscrew : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        // Optionally disable screws if needed (or keep them with the panel)
         foreach (GameObject screw in screws)
         {
             screw.SetActive(false);
@@ -66,9 +71,7 @@ public class PanelUnscrew : MonoBehaviour
             panel.SetActive(false);
         }
 
-        // Disable the trigger so it doesn’t fire again
         gameObject.SetActive(false);
-
         doorOpen = true;
     }
 }

@@ -494,7 +494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FAILED TO INITIATE PSYCHE SEQUENCE
+  m_text: FAILED TO INITIATE LAND SEQUENCE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 92ab3e94e99c46b4fb33b9ef50b8338e, type: 2}
   m_sharedMaterial: {fileID: 1513649432778740627, guid: 92ab3e94e99c46b4fb33b9ef50b8338e, type: 2}
@@ -1017,7 +1017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8298045291338814965, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.61
+      value: 27.73
       objectReference: {fileID: 0}
     - target: {fileID: 8298045291338814965, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_LocalRotation.w

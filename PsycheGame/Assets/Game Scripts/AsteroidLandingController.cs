@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class AsteroidLandingController : MonoBehaviour
 {
-    public Vector3 targetPosition = new Vector3(13f, -22f, -7f);
-    public Vector3 targetRotationEuler = new Vector3(85f, 12f, 124f);
+    public Vector3 targetPosition = new Vector3(20f, -30f, -5f);
+    public Vector3 targetRotationEuler = new Vector3(-59f, -82f, 15f);
     public float duration = 5f;
 
     private Vector3 startPosition;
