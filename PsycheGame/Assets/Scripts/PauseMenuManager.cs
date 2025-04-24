@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -10,7 +10,6 @@ public class PauseMenuManager : MonoBehaviour
     public CanvasGroup canvasGroup;
     public InputActionReference pauseAction;
     public Transform playerCamera;
-
     public LocomotionSystem locomotionSystem;
     public UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationProvider teleportationProvider;
 
@@ -54,6 +53,7 @@ public class PauseMenuManager : MonoBehaviour
         fadeCoroutine = StartCoroutine(FadeCanvas(isPaused));
         Time.timeScale = isPaused ? 0f : 1f;
 
+        // Disable movement & teleportation when paused
         if (locomotionSystem != null)
             locomotionSystem.enabled = !isPaused;
         if (teleportationProvider != null)
@@ -66,7 +66,7 @@ public class PauseMenuManager : MonoBehaviour
         float start = canvasGroup.alpha;
         float end = show ? 1f : 0f;
 
-        pauseMenuCanvas.SetActive(true); // Ensure it's active
+        pauseMenuCanvas.SetActive(true);
 
         for (float t = 0; t < duration; t += Time.unscaledDeltaTime)
         {
@@ -100,5 +100,11 @@ public class PauseMenuManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Title Screen");
     }
 }
