@@ -1711,8 +1711,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Goal:\r\n \r\nExplore around the room to combine puzzles through a sequence
     of progression to initiate the landing sequence by pressing the red button on
-    the console. \r\n\r\nControls:\n\nInteract and grab with the back trigger.\nWhen
-    holding an object, touch it to something to interact with it. \n\n\n"
+    the console. \r\n\r\nControls:\n\nInteract and grab with the front  trigger.\nWhen
+    holding an object, touch it to something to interact with it. \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 92ab3e94e99c46b4fb33b9ef50b8338e, type: 2}
   m_sharedMaterial: {fileID: 1513649432778740627, guid: 92ab3e94e99c46b4fb33b9ef50b8338e, type: 2}
